@@ -36,3 +36,32 @@ function create_question ($title, $body, $skills, $userId){
     $statement->execute();
     $statement->closeCursor();
 }
+
+function get_question ($questionId){
+    global $db;
+
+    $query = 'SELECT * FROM questions WHERE id = :questionId';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':questionId', $questionId);
+    $statement->execute();
+    $questions = $statement->fetch();
+    $statement->closeCursor();
+    return $questions;
+}
+
+function edit_question ($questionId, $title, $body, $skills){
+    global $db;
+
+    $query = 'UPDATE questions SET
+                title = :title,
+                body = :body,
+                skills = :skills
+              WHERE id=:questionID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':questionID', $questionId);
+    $statement->bindValue(':skills', $skills);
+    $statement->bindValue(':body', $body);
+    $statement->bindValue(':title', $title);
+    $statement->execute();
+    $statement->closeCursor();
+}
