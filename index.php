@@ -305,7 +305,6 @@ switch ($action) {
     }
 
     case 'display_edit_question':{
-        #todo: write this function
         $userId = filter_input(INPUT_POST, 'userId');
         if(empty($userId) || $userId<0){
             $userId = filter_input(INPUT_GET, 'userId');
@@ -324,7 +323,6 @@ switch ($action) {
     }
 
     case 'edit_question':{
-        #todo: write this function
         $userId = filter_input(INPUT_POST, 'userId');
         $questionID = filter_input(INPUT_POST, 'questionId');
         $qtitle = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
