@@ -39,6 +39,16 @@
                     <tr>
                         <td><?php echo $question['title']; ?></td>
                         <td><?php echo $question['body']; ?></td>
+                        <td>
+                            <form action="index.php" method="post">
+                                <input id="action" name="action" value="delete_question" type="hidden">
+                                <input id="userId" name="userId" value="<?php echo $userId;?>" type="hidden">
+                                <input id="questionID" name="questionID" value="<?php echo $question['id'];?>" type="hidden">
+                                <div>
+                                    <input class="btn btn-secondary btn-sm" type="submit" value="Delete">
+                                </div>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>

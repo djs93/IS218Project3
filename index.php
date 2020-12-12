@@ -327,7 +327,10 @@ switch ($action) {
     }
 
     case 'delete_question':{
-        #todo: write this function
+        $userId = filter_input(INPUT_POST, 'userId');
+        $questionID = filter_input(INPUT_POST, 'questionID');
+        delete_question($questionID);
+        header("Location: .?action=display_questions&userId=$userId");
         break;
     }
 
