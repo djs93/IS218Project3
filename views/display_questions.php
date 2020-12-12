@@ -24,12 +24,23 @@
                 <tr>
                     <th>Question Title</th>
                     <th>Quesiton Body</th>
+                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 <?php foreach ($questions as $question) : ?>
                     <tr>
                         <td><?php echo $question['title']; ?></td>
                         <td><?php echo $question['body']; ?></td>
+                        <td>
+                            <form action="index.php" method="post">
+                                <input id="action" name="action" value="display_edit_question" type="hidden">
+                                <input id="userId" name="userId" value="<?php echo $userId;?>" type="hidden">
+                                <input id="questionId" name="questionId" value="<?php echo $question['id'];?>" type="hidden">
+                                <div>
+                                    <input class="btn btn-secondary btn-sm" type="submit" value="Edit">
+                                </div>
+                            </form>
+                        </td>
                         <td>
                             <form action="index.php" method="post">
                                 <input id="action" name="action" value="delete_question" type="hidden">

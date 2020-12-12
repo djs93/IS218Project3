@@ -310,19 +310,95 @@ switch ($action) {
         if(empty($userId) || $userId<0){
             $userId = filter_input(INPUT_GET, 'userId');
         }
-        $nameError = filter_input(INPUT_GET, 'nameError');
-        $bodyError = filter_input(INPUT_GET, 'bodyError');
-        $skillsError = filter_input(INPUT_GET, 'skillsError');
+        $questionId = filter_input(INPUT_POST, 'questionId');
+        $question = get_question($questionId);
+        $qtitle = $question['title'];
+        $body = $question['body'];
+        $skills = $question['skills'];
         if($userId == NULL || $userId <0){
             header('Location: .?action=display_login');
         } else{
-            include('views/new_question.php');
+            include('views/edit_question.php');
         }
         break;
     }
 
     case 'edit_question':{
         #todo: write this function
+        $userId = filter_input(INPUT_POST, 'userId');
+        $questionID = filter_input(INPUT_POST, 'questionId');
+        $qtitle = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
+        $body = filter_input(INPUT_POST, 'body', FILTER_DEFAULT);
+        $skills = filter_input(INPUT_POST, 'skills', FILTER_DEFAULT);
+        $skillsArray = explode(",", $skills);
+
+        $nameError = "";
+        $bodyError = "";
+        $skillsError = "";
+
+        $hasNameError = "";
+        $hasBodyError = "";
+        $hasSkillsError = "";
+
+        if(empty($qtitle)){
+            $nameError .= "Question cannot be empty.";
+            $hasNameError = true;
+        }
+        else if(strlen($qtitle)<3){
+            $nameError .= "Question name must be at least 3 characters!";
+            $hasNameError = true;
+        }
+
+        if(strlen($body)===0){
+            $bodyError .= "Question Body cannot be empty.";
+            $hasBodyError = true;
+        }
+        else if(strlen($body)>=500){
+            $bodyError .= "Question body must be less than 500 characters!";
+            $hasBodyError = true;
+        }
+
+        if(count($skillsArray)<2){
+            $skillsError .= "Must enter at least 2 skills!";
+            $hasSkillsError = true;
+        }
+        if($hasNameError || $hasBodyError || $hasSkillsError){
+            $loc = "Location: .?action=display_edit_question_form_errored&userId=$userId&name=$qtitle&body=$body&skills=$skills";
+            if($hasNameError){
+                $loc .= "&nameError=$nameError";
+            }
+            if($hasBodyError){
+                $loc .= "&bodyError=$bodyError";
+            }
+            if($hasSkillsError){
+                $loc .= "&skillsError=$skillsError";
+            }
+            header($loc);
+        } else{
+            edit_question($questionID, $qtitle, $body, $skills);
+            header("Location: .?action=display_questions&userId=$userId");
+        }
+        break;
+    }
+
+    case 'display_edit_question_form_errored':{
+        $userId = filter_input(INPUT_POST, 'userId');
+        if(empty($userId) || $userId<0){
+            $userId = filter_input(INPUT_GET, 'userId');
+        }
+        $nameError = filter_input(INPUT_GET, 'nameError');
+        $bodyError = filter_input(INPUT_GET, 'bodyError');
+        $skillsError = filter_input(INPUT_GET, 'skillsError');
+
+        $qtitle = filter_input(INPUT_GET, 'name', FILTER_DEFAULT);
+        $body = filter_input(INPUT_GET, 'body', FILTER_DEFAULT);
+        $skills = filter_input(INPUT_GET, 'skills', FILTER_DEFAULT);
+        $skillsArray = explode(",", $skills);
+        if($userId == NULL || $userId <0){
+            header('Location: .?action=display_login');
+        } else{
+            include('views/edit_question.php');
+        }
         break;
     }
 
