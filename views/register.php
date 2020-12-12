@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-</head>
-<body class="text-center mt-4">
+<?php $title="Register"; include('abstract-views/header.php');?>
+<div class="col">
     <h1 class="h1 mb-3 font-weight-bold">Register</h1>
     <form action="index.php" method="post">
         <input id="action" name="action" value="verify_registration" type="hidden">
@@ -117,5 +111,5 @@
             <input class="btn btn-lg btn-primary mt-3" type="submit" value="Register">
         </div>
     </form>
-</body>
-</html>
+</div>
+<?php include('abstract-views/footer.php');?>

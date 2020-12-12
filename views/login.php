@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-</head>
-<body class="text-center mt-4">
+<?php $title="Login"; include('abstract-views/header.php');?>
+    <div class="col">
     <h1 class="h1 mb-3 font-weight-bold">Login</h1>
     <form action="index.php" method="post">
         <input id="action" name="action" value="validate_login" type="hidden">
@@ -44,5 +38,5 @@
             <input class="btn btn-secondary btn-lg mt-3" type="submit" value="Register">
         </div>
     </form>
-</body>
-</html>
+    </div>
+<?php include('abstract-views/footer.php');?>
