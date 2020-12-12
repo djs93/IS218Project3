@@ -65,3 +65,14 @@ function edit_question ($questionId, $title, $body, $skills){
     $statement->execute();
     $statement->closeCursor();
 }
+
+function delete_question ($questionId){
+    global $db;
+
+    $query = 'DELETE FROM questions 
+              WHERE id=:questionID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':questionID', $questionId);
+    $statement->execute();
+    $statement->closeCursor();
+}

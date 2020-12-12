@@ -17,6 +17,7 @@ function validate_login($email, $password){
     }
 }
 
+//"Creating a user" function
 function add_user($email, $fname, $lname, $birthday, $password){
     global $db;
     $query = 'INSERT INTO `accounts` (`email`, `fname`, `lname`, `birthday`, `password`) 
@@ -61,6 +62,7 @@ function check_registered($email){
     }
 }
 
+//"Getting a user" function
 function get_user_info($userId){
     global $db;
     $query = 'SELECT * FROM accounts WHERE id = :id';
